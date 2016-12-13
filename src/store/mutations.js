@@ -24,3 +24,45 @@ export function generateDummyContent (state) {
     })
   }
 }
+
+export function generateDummyBlueprints (state) {
+  // Group 0
+  state.blueprints.push({
+    name: 'fruits',
+    label: 'Fruits',
+    blueprints: [
+      {
+        name: 'banana',
+        label: 'Banana blueprint',
+        config: { name: 'Banana' }
+      },
+      {
+        name: 'apple',
+        label: 'Apple blueprint',
+        config: { name: 'Apple' }
+      },
+      {
+        name: 'kiwi',
+        label: 'Kiwi blueprint',
+        config: { name: 'Kiwi' }
+      }
+    ]
+  })
+  // Group 1
+  state.blueprints.push({
+    name: 'vegetables',
+    label: 'Vegetables',
+    blueprints: [
+      {
+        name: 'potato',
+        label: 'Potato blueprint',
+        config: { name: 'Potato' }
+      },
+      {
+        name: 'carrot',
+        label: 'Carrot blueprint',
+        config: { name: 'Carrot' }
+      }
+    ]
+  })
+}
