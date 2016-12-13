@@ -1,5 +1,24 @@
-This is (or rather will be) a user interface for creating trees of configurable elements. Examples for such trees include:
+# fb2
 
-- Forms
-- Web sites (CMS like functionality)
+> JavaScript form builder UI
 
+## Build Setup
+
+``` bash
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+
+# lint all *.js and *.vue files
+npm run lint
+
+# run unit tests
+npm test
+```
+
+For more information see the [docs for vueify](https://github.com/vuejs/vueify).
