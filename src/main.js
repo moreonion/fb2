@@ -3,8 +3,10 @@
 // This is done with the browser options. For the config, see package.json
 import Vue from 'vue'
 import App from './App.vue'
+import Backend from './backend-stub.js'
 
 new Vue({ // eslint-disable-line no-new
   el: '#app',
-  render: (h) => h(App)
+  render: (h) => h(App),
+  backend: new Backend()
 })
