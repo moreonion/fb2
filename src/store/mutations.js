@@ -77,6 +77,7 @@ export function generateDummyBlueprints (state) {
 }
 
 export function addElement (state, { element, parent, pos }) {
+  element.parent = parent
   parent.children.splice(pos, 0, element)
 }
 
