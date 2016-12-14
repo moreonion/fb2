@@ -23,6 +23,15 @@ export function generateDummyContent (state) {
       config: { name: 'Element 0-1-' + k }
     })
   }
+  // add an apples
+  state.root.children.push({
+    children: [],
+    parent: state.root,
+    config: { name: 'apple' }
+  })
+  // some test settings
+  state.root.children[2].config.hatesApples = true
+  state.root.children[2].config.name += ' (hates apples)'
 }
 
 export function generateDummyBlueprints (state) {
@@ -65,4 +74,17 @@ export function generateDummyBlueprints (state) {
       }
     ]
   })
+}
+
+export function addElement (state, { element, parent, pos }) {
+  parent.children.splice(pos, 0, element)
+}
+
+export function removeElement (state, { element }) {
+  for (var i = 0, j = element.parent.children.length; i < j; i++) {
+    if (element.parent.children[i] === element) {
+      console.log('remove element ' + i)
+      element.parent.children.splice(i, 1)
+    }
+  }
 }

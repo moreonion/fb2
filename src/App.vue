@@ -6,6 +6,9 @@
     <ul id="palette">
       <blueprint-group v-for="blueprint in blueprints" :group="blueprint"></blueprint-group>
     </ul>
+
+    <button type="button" name="button" v-on:click="$store.dispatch('cloneElement', { element: $store.state.root.children[3], parent: $store.state.root.children[1], pos: 0 })">try clone the apple to Element 1</button>
+    <button type="button" name="button" v-on:click="$store.dispatch('cloneElement', { element: $store.state.root.children[3], parent: $store.state.root.children[2], pos: 0 })">try clone the apple to Element 2 which hates apples</button>
   </div>
 </template>
 
