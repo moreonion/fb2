@@ -2,7 +2,7 @@
   <li class="element">
     <h3>
       {{ name }}
-      <button type="button" name="button" v-on:click="$store.dispatch('deleteElement', { element })">Delete</button>
+      <button type="button" name="button" v-on:click="$store.dispatch('deleteElement', b({ element }))">Delete</button>
     </h3>
     <ul v-if="element.children.length" class="children">
       <tree-element v-for="child in element.children" :element="child"></tree-element>

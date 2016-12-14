@@ -6,9 +6,21 @@ import App from './App.vue'
 import Backend from './backend-stub.js'
 import store from './store'
 
+const backend = new Backend()
+
+Vue.mixin({
+  methods: {
+    b (obj) {
+      // mix the backend into obj
+      obj.backend = backend
+      return obj
+    }
+  }
+})
+
 new Vue({ // eslint-disable-line no-new
   el: '#app',
   store,
   render: (h) => h(App),
-  backend: new Backend()
+  backend
 })
