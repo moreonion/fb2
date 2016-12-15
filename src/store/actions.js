@@ -49,3 +49,28 @@ export function deleteElement ({ commit, dispatch }, { element, backend }) {
     window.alert(element.config.name + ' is not removable!')
   })
 }
+
+export function getTree ({commit}, {backend}) {
+  return backend.tree.then((tree) => {
+    commit('updateTree', tree)
+  })
+}
+
+export function getBlueprints ({commit}, {backend}) {
+  return backend.blueprints.then((blueprints) => {
+    commit('updateBlueprints', blueprints)
+  })
+}
+
+export function newElementFromBlueprint ({commit, dispatch}, {blueprint, parent, pos, backend}) {
+  var element
+  return blueprint.newElement().then((newElement) => {
+    element = newElement
+    return Promise.all([
+      element.mayAddTo({parent, pos}),
+      parent.mayHaveChild({element, pos})
+    ]).then(() => {
+      commit('addElement', {element, parent, pos})
+    })
+  })
+}

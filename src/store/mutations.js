@@ -76,6 +76,14 @@ export function generateDummyBlueprints (state) {
   })
 }
 
+export function updateTree (state, tree) {
+  state.root = tree
+}
+
+export function updateBlueprints (state, blueprints) {
+  state.blueprints = blueprints
+}
+
 export function addElement (state, { element, parent, pos }) {
   element.parent = parent
   parent.children.splice(pos, 0, element)
