@@ -1,6 +1,6 @@
 export class Blueprint {
 
-  construct (name, label) {
+  constructor (name, label) {
     this.name = name
     this.label = label
   }
@@ -17,7 +17,7 @@ export class Blueprint {
 
 export class Element {
 
-  construct (config, parent = null) {
+  constructor (config, parent = null) {
     this.config = config
     this.parent = parent
   }

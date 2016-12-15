@@ -32,7 +32,7 @@ export default {
   },
   created () {
     this.$store.commit('generateDummyContent')
-    this.$store.commit('generateDummyBlueprints')
+    this.$store.dispatch('getBlueprints', this.b({}))
   }
 }
 </script>
