@@ -1,36 +1,22 @@
 export function mayAddElement ({ state }, { element, parent, pos, backend }) {
-  return new Promise((resolve, reject) => {
-    // ask the backend whether a child accepts a specific parent and the
-    // parent-to-be likes the new child
-    setTimeout(() => {
-      if (element.config.name === 'apple' && parent.config.hatesApples) {
-        console.log('the new parent hates apples')
-        reject()
-      } else {
-        console.log(element.config.name + ' may be added to ' + parent.config.name)
-        resolve(true)
-      }
-    }, 500)
-  })
+  // Ask the backend whether a child accepts a specific parent and the
+  // parent-to-be likes the new child.
+  return Promise.all([
+    element.isAllowedInside(parent, pos),
+    parent.allowsChild(element, pos)
+  ])
 }
 
 export function mayRemoveElement ({ state }, { element, parent, pos, backend }) {
   return new Promise((resolve, reject) => {
-    // don’t remove the root
+    // Don’t remove the root.
     if (element.parent === null) {
-      console.log('nulla')
       reject()
     }
-    // ask the element and it’s parent whether it may be removed
-    setTimeout(() => {
-      // can’t delete apples
-      if (element.config.name === 'apple') {
-        console.log(element.config.name)
-        reject()
-      } else {
-        resolve(true)
-      }
-    }, 500)
+
+    // Ask the element whether it can be removed.
+    element.isRemovable(state)
+      .then(() => resolve(true), () => reject())
   })
 }
 
@@ -51,24 +37,24 @@ export function deleteElement ({ commit, dispatch }, { element, backend }) {
 }
 
 export function getTree ({commit}, {backend}) {
-  return backend.tree.then((tree) => {
+  return backend.tree().then((tree) => {
     commit('updateTree', tree)
   })
 }
 
 export function getBlueprints ({commit}, {backend}) {
-  return backend.blueprints.then((blueprints) => {
+  return backend.blueprints().then((blueprints) => {
     commit('updateBlueprints', blueprints)
   })
 }
 
 export function newElementFromBlueprint ({commit, dispatch}, {blueprint, parent, pos, backend}) {
   var element
-  return blueprint.newElement().then((newElement) => {
+  return blueprint.createElement().then((newElement) => {
     element = newElement
     return Promise.all([
-      element.mayAddTo({parent, pos}),
-      parent.mayHaveChild({element, pos})
+      element.isAllowedInside({parent, pos}),
+      parent.allowsChild({element, pos})
     ]).then(() => {
       commit('addElement', {element, parent, pos})
     })
