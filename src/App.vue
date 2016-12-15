@@ -31,8 +31,8 @@ export default {
     blueprintGroup
   },
   created () {
-    this.$store.commit('generateDummyContent')
     this.$store.dispatch('getBlueprints', this.b({}))
+    this.$store.dispatch('getTree', this.b({}))
   }
 }
 </script>

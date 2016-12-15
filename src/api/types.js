@@ -17,9 +17,10 @@ export class Blueprint {
 
 export class Element {
 
-  constructor (config, parent = null) {
+  constructor (config, parent = null, children = []) {
     this.config = config
     this.parent = parent
+    this.children = children
   }
 
   /**
@@ -50,6 +51,10 @@ export class Element {
 
   isRemoveable (tree) {
     return Promise.resolve(true)
+  }
+
+  preview () {
+    return Promise.resolve('I am an element.')
   }
 
 }
